@@ -8,7 +8,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         validateTemperatureSeries(temperatureSeries);
-        this.tempSeries = temperatureSeries;
+        this.tempSeries = temperatureSeries.clone();
     }
 
     public TemperatureSeriesAnalysis() {
@@ -187,6 +187,8 @@ public class TemperatureSeriesAnalysis {
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
     }
+
+    protected final void finalize() throws Throwable {}
 
     private void validateTemperatureSeries(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
