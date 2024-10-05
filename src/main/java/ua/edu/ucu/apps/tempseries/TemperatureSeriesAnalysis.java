@@ -7,11 +7,7 @@ public class TemperatureSeriesAnalysis {
     private double[] tempSeries;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        for (double temp : temperatureSeries) {
-            if (temp <= BARIER) {
-                throw new InputMismatchException();
-            }
-        }
+        validateTemperatureSeries(temperatureSeries);
         this.tempSeries = temperatureSeries;
     }
 
@@ -20,7 +16,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] getTempSeries() {
-        return this.tempSeries;
+        return this.tempSeries.clone();
     }
 
     public double average() {
@@ -149,7 +145,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] sortTemps() {
-        double[] res = this.tempSeries;
+        double[] res = this.tempSeries.clone();
         for (int i = 0; i < res.length; i++) {
             for (int j = i + 1; j < res.length; j++) {
                 if (res[i] > res[j]) {
@@ -190,6 +186,14 @@ public class TemperatureSeriesAnalysis {
         this.tempSeries.length, temps.length);
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
+    }
+
+    private void validateTemperatureSeries(double[] temperatureSeries) {
+        for (double temp : temperatureSeries) {
+            if (temp <= BARIER) {
+                throw new InputMismatchException();
+            }
+        }
     }
 
 }

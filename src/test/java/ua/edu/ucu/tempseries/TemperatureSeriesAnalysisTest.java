@@ -194,9 +194,9 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double[] expResult = {-4.0, -3.0, -2.0, -1.0, 1.0, 2.0, 3.0, 4.0};
 
-        seriesAnalysis.sortTemps();
+        double[] res = seriesAnalysis.sortTemps();
 
-        assertArrayEquals(expResult, seriesAnalysis.getTempSeries(), 0.00001);
+        assertArrayEquals(expResult, res, 0.00001);
     }
 
     @Test
