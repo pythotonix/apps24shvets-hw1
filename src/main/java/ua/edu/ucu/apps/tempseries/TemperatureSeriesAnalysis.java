@@ -2,8 +2,9 @@ package ua.edu.ucu.apps.tempseries;
 
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
-    private double[] tempSeries;
+
     static final int BARIER = -273;
+    private double[] tempSeries;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
