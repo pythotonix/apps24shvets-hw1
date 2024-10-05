@@ -3,7 +3,7 @@ package ua.edu.ucu.apps.tempseries;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] tempSeries;
-    private int BARIER = -273;
+    static final int BARIER = -273;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
