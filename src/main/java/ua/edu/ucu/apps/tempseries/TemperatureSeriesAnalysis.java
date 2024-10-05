@@ -9,17 +9,17 @@ public class TemperatureSeriesAnalysis {
         return tempSeries;
     }
 
-    public TemperatureSeriesAnalysis() {
-        this.tempSeries = new double[0];
-    }
-
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
-            if (temp < -273) {
+            if (temp <= -273) {
                 throw new InputMismatchException();
             }
         }
         this.tempSeries = temperatureSeries;
+    }
+
+    public TemperatureSeriesAnalysis() {
+        this.tempSeries = new double[0];
     }
 
     public double average() {
@@ -40,7 +40,7 @@ public class TemperatureSeriesAnalysis {
         double avg = average();
         double sum = 0;
         for (double temp : this.tempSeries) {
-            sum += Math.pow(temp - avg, 2);
+            sum += (temp - avg)*(temp - avg);
         }
         return Math.sqrt(sum / this.tempSeries.length);
     }
@@ -95,7 +95,8 @@ public class TemperatureSeriesAnalysis {
         for (double temp : this.tempSeries) {
             if (Math.abs(temp - tempValue) <= Math.abs(closest - tempValue)) {
                 closest = temp;
-                if (Math.abs(temp - tempValue) == Math.abs(closest - tempValue)) {
+                if (Math.abs(temp - tempValue) == 
+                Math.abs(closest - tempValue)) {
                     closest = Math.abs(temp);
                 }
             }
@@ -173,7 +174,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         for (double temp : temps) {
-            if (temp < -273) {
+            if (temp <= -273) {
                 throw new IllegalArgumentException();
             }
         }
@@ -182,7 +183,8 @@ public class TemperatureSeriesAnalysis {
             newSize = temps.length;
         }
         double[] newTempSeries = new double[newSize];
-        System.arraycopy(this.tempSeries, 0, newTempSeries, 0, this.tempSeries.length);
+        System.arraycopy(this.tempSeries, 0, newTempSeries, 
+        0, this.tempSeries.length);
         System.arraycopy(temps, 0, newTempSeries, this.tempSeries.length, temps.length);
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
