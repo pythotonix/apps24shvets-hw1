@@ -6,6 +6,11 @@ public class TemperatureSeriesAnalysis {
     static final int BARIER = -273;
     private double[] tempSeries;
 
+    public static TemperatureSeriesAnalysis create(double[] temperatureSeries) {
+        validateTemperatureSeries(temperatureSeries);
+        return new TemperatureSeriesAnalysis(temperatureSeries);
+    }
+
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         validateTemperatureSeries(temperatureSeries);
         this.tempSeries = temperatureSeries.clone();
@@ -188,9 +193,8 @@ public class TemperatureSeriesAnalysis {
         return this.tempSeries.length;
     }
 
-    protected final void finalize() throws Throwable {}
 
-    private void validateTemperatureSeries(double[] temperatureSeries) {
+    private static void validateTemperatureSeries(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
             if (temp <= BARIER) {
                 throw new InputMismatchException();
