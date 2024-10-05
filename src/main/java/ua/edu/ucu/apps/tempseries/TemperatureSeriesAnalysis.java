@@ -5,7 +5,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
-            if (temp <= -273) {
+            if (temp <= barier) {
                 throw new InputMismatchException();
             }
         }
@@ -15,8 +15,6 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis() {
         this.tempSeries = new double[0];
     }
-
-    private double[] tempSeries;
 
     public double[] getTempSeries() {
         return this.tempSeries;
@@ -174,7 +172,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         for (double temp : temps) {
-            if (temp <= -273) {
+            if (temp <= barier) {
                 throw new IllegalArgumentException();
             }
         }
@@ -190,4 +188,7 @@ public class TemperatureSeriesAnalysis {
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
     }
+
+    private double[] tempSeries;
+    private int barier = -273;
 }
