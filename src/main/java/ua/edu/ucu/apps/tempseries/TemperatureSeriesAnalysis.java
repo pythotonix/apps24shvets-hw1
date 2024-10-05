@@ -3,12 +3,6 @@ package ua.edu.ucu.apps.tempseries;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
 
-    private double[] tempSeries;
-
-    public double[] getTempSeries() {
-        return tempSeries;
-    }
-
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
             if (temp <= -273) {
@@ -20,6 +14,12 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis() {
         this.tempSeries = new double[0];
+    }
+
+    private double[] tempSeries;
+
+    public double[] getTempSeries() {
+        return this.tempSeries;
     }
 
     public double average() {
@@ -95,8 +95,8 @@ public class TemperatureSeriesAnalysis {
         for (double temp : this.tempSeries) {
             if (Math.abs(temp - tempValue) <= Math.abs(closest - tempValue)) {
                 closest = temp;
-                if (Math.abs(temp - tempValue) == 
-                Math.abs(closest - tempValue)) {
+                if (Math.abs(temp - tempValue) 
+                == Math.abs(closest - tempValue)) {
                     closest = Math.abs(temp);
                 }
             }
@@ -185,7 +185,8 @@ public class TemperatureSeriesAnalysis {
         double[] newTempSeries = new double[newSize];
         System.arraycopy(this.tempSeries, 0, newTempSeries, 
         0, this.tempSeries.length);
-        System.arraycopy(temps, 0, newTempSeries, this.tempSeries.length, temps.length);
+        System.arraycopy(temps, 0, newTempSeries, 
+        this.tempSeries.length, temps.length);
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
     }
