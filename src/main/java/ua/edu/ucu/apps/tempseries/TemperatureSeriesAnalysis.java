@@ -2,10 +2,12 @@ package ua.edu.ucu.apps.tempseries;
 
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
+    private double[] tempSeries;
+    private int BARIER = -273;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
-            if (temp <= barier) {
+            if (temp <= BARIER) {
                 throw new InputMismatchException();
             }
         }
@@ -172,7 +174,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         for (double temp : temps) {
-            if (temp <= barier) {
+            if (temp <= BARIER) {
                 throw new IllegalArgumentException();
             }
         }
@@ -189,6 +191,4 @@ public class TemperatureSeriesAnalysis {
         return this.tempSeries.length;
     }
 
-    private double[] tempSeries;
-    private int barier = -273;
 }
