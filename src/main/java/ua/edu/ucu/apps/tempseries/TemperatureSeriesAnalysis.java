@@ -19,6 +19,11 @@ public class TemperatureSeriesAnalysis {
         }
     }
 
+    public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+        validateTemperatureSeries(temperatureSeries);
+        this.tempSeries = temperatureSeries.clone();
+    }
+
     public TemperatureSeriesAnalysis() {
         this.tempSeries = new double[0];
     }
@@ -196,7 +201,4 @@ public class TemperatureSeriesAnalysis {
         return this.tempSeries.length;
     }
 
-    private TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        this.tempSeries = temperatureSeries.clone();
-    }
 }
