@@ -1,15 +1,11 @@
 package ua.edu.ucu.apps.tempseries;
 
 import java.util.InputMismatchException;
-public class TemperatureSeriesAnalysis {
+
+public class TemperatureSeriesAnalysis implements AutoCloseable {
 
     static final int BARIER = -273;
     private double[] tempSeries;
-
-    public static TemperatureSeriesAnalysis create(double[] temperatureSeries) {
-        validateTemperatureSeries(temperatureSeries);
-        return new TemperatureSeriesAnalysis(temperatureSeries);
-    }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         validateTemperatureSeries(temperatureSeries);
@@ -18,6 +14,11 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis() {
         this.tempSeries = new double[0];
+    }
+
+    public static TemperatureSeriesAnalysis create(double[] temperatureSeries) {
+        validateTemperatureSeries(temperatureSeries);
+        return new TemperatureSeriesAnalysis(temperatureSeries);
     }
 
     public double[] getTempSeries() {
@@ -42,7 +43,7 @@ public class TemperatureSeriesAnalysis {
         double avg = average();
         double sum = 0;
         for (double temp : this.tempSeries) {
-            sum += (temp - avg)*(temp - avg);
+            sum += (temp - avg) * (temp - avg);
         }
         return Math.sqrt(sum / this.tempSeries.length);
     }
@@ -97,8 +98,7 @@ public class TemperatureSeriesAnalysis {
         for (double temp : this.tempSeries) {
             if (Math.abs(temp - tempValue) <= Math.abs(closest - tempValue)) {
                 closest = temp;
-                if (Math.abs(temp - tempValue) 
-                == Math.abs(closest - tempValue)) {
+                if (Math.abs(temp - tempValue) == Math.abs(closest - tempValue)) {
                     closest = Math.abs(temp);
                 }
             }
@@ -180,15 +180,13 @@ public class TemperatureSeriesAnalysis {
                 throw new IllegalArgumentException();
             }
         }
-        int newSize = this.tempSeries.length*2;
+        int newSize = this.tempSeries.length * 2;
         if (this.tempSeries.length == 0) {
             newSize = temps.length;
         }
         double[] newTempSeries = new double[newSize];
-        System.arraycopy(this.tempSeries, 0, newTempSeries, 
-        0, this.tempSeries.length);
-        System.arraycopy(temps, 0, newTempSeries, 
-        this.tempSeries.length, temps.length);
+        System.arraycopy(this.tempSeries, 0, newTempSeries, 0, this.tempSeries.length);
+        System.arraycopy(temps, 0, newTempSeries, this.tempSeries.length, temps.length);
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
     }
@@ -201,4 +199,13 @@ public class TemperatureSeriesAnalysis {
         }
     }
 
+    @Override
+    public void close() {
+        // Clear sensitive data
+        if (this.tempSeries != null) {
+            for (int i = 0; i < this.tempSeries.length; i++) {
+                this.tempSeries[i] = 0.0;
+            }
+        }
+    }
 }
