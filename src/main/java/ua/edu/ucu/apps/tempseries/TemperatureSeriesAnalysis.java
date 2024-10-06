@@ -98,7 +98,8 @@ public class TemperatureSeriesAnalysis implements AutoCloseable {
         for (double temp : this.tempSeries) {
             if (Math.abs(temp - tempValue) <= Math.abs(closest - tempValue)) {
                 closest = temp;
-                if (Math.abs(temp - tempValue) == Math.abs(closest - tempValue)) {
+                if (Math.abs(temp - tempValue) 
+                == Math.abs(closest - tempValue)) {
                     closest = Math.abs(temp);
                 }
             }
@@ -185,8 +186,10 @@ public class TemperatureSeriesAnalysis implements AutoCloseable {
             newSize = temps.length;
         }
         double[] newTempSeries = new double[newSize];
-        System.arraycopy(this.tempSeries, 0, newTempSeries, 0, this.tempSeries.length);
-        System.arraycopy(temps, 0, newTempSeries, this.tempSeries.length, temps.length);
+        System.arraycopy(this.tempSeries, 0, 
+        newTempSeries, 0, this.tempSeries.length);
+        System.arraycopy(temps, 0, newTempSeries, 
+        this.tempSeries.length, temps.length);
         this.tempSeries = newTempSeries;
         return this.tempSeries.length;
     }
